@@ -1,0 +1,13 @@
+Flask
+joblib
+matplotlib
+nltk
+numpy
+pandas
+pydotplus
+python-dateutil
+wordcloud
+requests
+gdown
+Sastrawi
+gunicorn

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/traffic-light.svg') }}">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/data.css">
+    <link rel="stylesheet" href="../static/css/analisis.css">
+    <title>Dashboard Penelitian</title>
+</head>
+
+<body>
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+        <div class="logo">
+            <a href="{{ url_for('index') }}" class="brand">
+                <img src="{{ url_for('static', filename='img/traffic-light.svg') }}" alt="Logo">
+                JagaLantas
+            </a>
+        </div>
+        <ul class="side-menu">
+            <li><a href="{{ url_for('index') }}"><i class='bx  bxs-user-circle icon'></i> About</a></li>
+            <li><a href="{{ url_for('scraping_page') }}"><i class='bx  bxs-news icon'></i> Scraping</a></li>
+            <li><a href="{{ url_for('data_page') }}"><i class='bx  bxs-database icon'></i> Data</a></li>
+            <li><a href="{{ url_for('dashboard_page') }}"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
+            <li><a href="{{ url_for('classification_page') }}" class="active"><i class='bx  bxs-network-chart icon'></i>
+                    Pola</a>
+            </li>
+        </ul>
+    </section>
+    <!-- SIDEBAR -->
+
+    <!-- NAVBAR -->
+    <section id="content">
+        <!-- NAVBAR -->
+        <nav>
+            <i class='bx bx-menu toggle-sidebar'></i>
+        </nav>
+        <!-- NAVBAR -->
+
+        <!-- MAIN -->
+        <main>
+            <h1 class="title">Pola</h1>
+            <ul class="breadcrumbs">
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li class="divider">/</li>
+                <li><a href="{{ url_for('classification_page') }}" class="active">Pola</a></li>
+            </ul>
+
+            <div class="info-data">
+                <div class="card">
+                    <div class="head-scrap">
+                        <div class="head-download">
+                            <div>
+                                <h2 style="font-size: 25px;">Tabel <i>Dataset</i> Klasifikasi Laka Lantas Hasil
+                                    Ekstraksi Berita <i>Online</i></h2>
+                            </div>
+                            <button href="{{ url_for('download_classification_table') }}"
+                                id="btn-download-classification" class="btn-download-classification">Unduh</button>
+                        </div>
+                        <div class="table-wrapper">
+                            <table id="ClassificationTable">
+                                <thead>
+                                    <tr>
+                                        <th>No</th> <!-- Kolom nomor -->
+                                        <th>Hari</th>
+                                        <th>Waktu</th>
+                                        <th>Kendaraan</th>
+                                        <th>Jalan</th>
+                                        <th>Penyebab</th>
+                                        <th>Usia Pengemudi</th>
+                                        <th>Fatalitas</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="variable-explain">
+                        <p>Keterangan Variabel: </p>
+                        <div class="table-container">
+                            <table class="variable-table">
+                                <thead>
+                                    <tr>
+                                        <th>Variabel</th>
+                                        <th>Atribut</th>
+                                        <th>Keterangan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>DAY (Hari)</td>
+                                        <td>Weekday, Weekend</td>
+                                        <td>Weekday terdiri atas Senin, Selasa, Rabu, Kamis, dan Jumat, Weekend terdiri
+                                            atas
+                                            Sabtu dan Minggu</td>
+                                    </tr>
+                                    <tr>
+                                        <td>TIME (Waktu)</td>
+                                        <td>Pagi, Siang, Sore, Malam</td>
+                                        <td>Pagi dimulai pukul 00.01 - 10.59 WIB, Siang dimulai pukul 11.00 - 14.59 WIB,
+                                            Sore dimulai pukul 15.00 - 17.59 WIB, Malam dimulai pukul 18.00 - 00.00 WIB
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>VEHICLE (Jenis Kendaraan)</td>
+                                        <td>Kendaraan Roda Dua, Kendaraan Ringan, Kendaraan Berat</td>
+                                        <td>Kendaraan Roda Dua terdiri atas sepeda dan sepeda motor, Kendaraan Ringan
+                                            terdiri atas mobil, pickup, jip, Kendaraan Berat terdiri atas bus dan truk
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>ROAD (Jenis Jalan)</td>
+                                        <td>Tol, Non-Tol</td>
+                                        <td>Tol merujuk pada kecelakaan yang terjadi di jalan tol, Non-Tol merujuk pada
+                                            kecelakaan yang terjadi di selain jalan tol</td>
+                                    </tr>
+                                    <tr>
+                                        <td>CAUSE (Penyebab)</td>
+                                        <td>Faktor Manusia, Faktor Kendaraan, Faktor Lingkungan, Faktor Jalan</td>
+                                        <td>Faktor Manusia, Kendaraan, Lingkungan, dan Jalan masing-masing menjadi
+                                            penyebab
+                                            kecelakaan yang berasal dari manusia, kendaraan, lingkungan, dan jalan.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>DRIVER_AGE (Usia Pengemudi)</td>
+                                        <td>Di bawah umur, Ideal, Lansia</td>
+                                        <td>Di bawah umur merupakan pengendara berusia di bawah 17 tahun, Ideal
+                                            merupakan
+                                            pengendara rentang usia 17 - 60 tahun, Lansia merupakan pengendara di atas
+                                            60
+                                            tahun</td>
+                                    </tr>
+                                    <tr>
+                                        <td>DEATH (Fatalitas)</td>
+                                        <td>Ada, Tidak Korban Jiwa</td>
+                                        <td>Ada artinya kecelakaan menyebabkan korban meninggal dunia, Tidak artinya
+                                            kecelakaan tidak menyebabkan korban meninggal</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="head-scrap">
+                        <div>
+                            <h2>Pohon Keputusan Pola Kecelakaan Lalu Lintas 2020-2024</h2>
+                        </div>
+                        <div class="tree-image">
+                            <img src="../static/img/tree_visualization.png" alt="Decision Tree">
+                            <p>Catatan:</p>
+                            <ul class="tree-notes">
+                                <li><i>Support</i> menunjukkan jumlah sampel pada suatu simpul.</li>
+                                <li>Persentase kelas menunjukkan proporsi data tiap kelas dalam simpul yang digunakan
+                                    untuk prediksi.</li>
+                                <li>Cara membaca gambar dimulai dari simpul paling kiri (akar) dan mengikuti cabang
+                                    hingga mencapai simpul akhir (daun). Simpul akhir berwarna oranye menunjukkan ada
+                                    korban jiwa, sedangkan biru menunjukkan tidak ada korban jiwa. Angka 1 pada cabang
+                                    berarti "ya" dan angka 0 berarti "tidak".</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="head-scrap">
+                        <div>
+                            <h2>Penjelasan Pola Kecelakaan Lalu Lintas</h2>
+                        </div>
+                        <div class="tree-image">
+                            <ul class="tree-notes-2">
+                                <li>Waktu <b>pagi hari</b> merupakan waktu rawan kecelakaan lalu lintas yang menyebabkan
+                                    korban
+                                    jiwa, baik di hari kerja maupun akhir pekan.</li>
+                                <li>Fatalitas akibat kecelakaan lalu lintas yang terjadi di <b>akhir pekan</b> biasanya
+                                    melibatkan kendaraan roda dua atau kendaraan berat, sedangkan pada <b>hari kerja</b>
+                                    biasanya terjadi karena faktor jalan atau lingkungan.</li>
+                                <li><b>Usia pengemudi ideal (17-60 tahun) </b> masih dapat terlibat dalam kecelakaan
+                                    lalu
+                                    lintas yang menyebabkan korban jiwa jika terdapat variabel lain yang lebih berisiko,
+                                    seperti <b>waktu kejadian</b>, <b>hari kejadian</b>, <b>faktor penyebab</b>,
+                                    <b>jenis kendaraan</b>, dan <b>jenis
+                                        jalan</b>.
+                                </li>
+                                <li> <b> Pengemudi berusia di bawah umur (<17 tahun) </b> yang berkendara di waktu
+                                            <b>siang hari</b> atau
+                                            <b>malam hari </b> berisiko menimbulkan fatalitas pada kecelakaan lalu
+                                            lintas
+                                            tanpa
+                                            dipengaruhi variabel lainnya. </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- MAIN -->
+    </section>
+    <!-- NAVBAR -->
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="../static/js/script.js"></script>
+    <script src="../static/js/data.js"></script>
+    <script src="../static/js/analisis.js"></script>
+</body>
+
+</html>
