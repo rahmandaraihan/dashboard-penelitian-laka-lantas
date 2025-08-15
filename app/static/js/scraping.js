@@ -76,7 +76,7 @@ function loadScrapingResults() {
         })
         .catch(error => {
             console.error('Gagal memuat data:', error);
-            document.getElementById('last-update').textContent = 'Terjadi kesalahan saat memuat data.';
+            document.getElementById('last-update').textContent = 'Tidak ada data yang discraping hari ini.';
         });
 }
 
