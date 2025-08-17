@@ -418,6 +418,9 @@ def dashboard_page():
     if lokasi:
         lokasi = lokasi.strip().lower()
 
+    tanggal_terbaru = df_loc['DATE_STANDARDIZED'].max()
+    tanggal_terbaru_str = tanggal_terbaru.strftime('%Y-%m-%d') if pd.notna(tanggal_terbaru) else None
+
     return render_template(
         'dashboard.html',
         labels_vehicle=labels_vehicle,
@@ -443,6 +446,7 @@ def dashboard_page():
         end_date=end_date,
         geojson_data=json.dumps(geojson_data),
         periode_laka=periode_laka,
+        tanggal_terbaru=tanggal_terbaru_str
     )
 
 
@@ -774,8 +778,17 @@ def load_classification_data():
         
         df_classification = df_classification.replace({np.nan: None})
 
+        file_id_df_extraction = '1j6eul3EJevsXGhx2tJhrrb5KuGwhdnJL'
+        df_extraction = load_csv_from_drive( file_id_df_extraction, version=int(time.time() // 3600))
+        
+        df_extraction = df_extraction.replace({np.nan: None})
+
         data = df_classification.to_dict(orient='records')
-        return jsonify(data)
+        tanggal_terbaru = df_extraction['DATE_STANDARDIZED'].max()
+        return jsonify({
+            "data": data,
+            "tanggal_terbaru": tanggal_terbaru
+        })
     except Exception as e:
         return jsonify({"error": str(e)})
 
