@@ -24,6 +24,12 @@ main .info-data {
     margin-top: 20px;
 }
 
+.ket-table {
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: justify;
+}
+
 #resultTable {
     width: 100%;
     border-collapse: collapse;

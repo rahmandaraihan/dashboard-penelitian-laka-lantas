@@ -1,101 +1,143 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
-	<link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/traffic-light.svg') }}">
-	<link rel="stylesheet" href="../static/css/style.css">
 	<title>Dashboard Penelitian</title>
+	<link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/traffic-light.svg') }}">
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 
-<body>
-	<!-- SIDEBAR -->
-	<section id="sidebar">
-		<div class="logo">
-			<a href="{{ url_for('index') }}" class="brand">
-				<img src="{{ url_for('static', filename='img/traffic-light.svg') }}" alt="Logo">
-				JagaLantas
-			</a>
-		</div>
-		<ul class="side-menu">
-			<li><a href="{{ url_for('index') }}" class="active"><i class='bx  bxs-user-circle icon'></i> About</a></li>
-			<li><a href="{{ url_for('scraping_page') }}"><i class='bx  bxs-news icon'></i> Scraping</a></li>
-			<li><a href="{{ url_for('data_page') }}"><i class='bx  bxs-database icon'></i> Data</a></li>
-			<li><a href="{{ url_for('dashboard_page') }}"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
-			<li><a href="{{ url_for('classification_page') }}"><i class='bx  bxs-network-chart icon'></i> Pola</a>
-			</li>
-
-		</ul>
-	</section>
-	<!-- SIDEBAR -->
-
+<body class="bg-gray-50 text-gray-800">
 	<!-- NAVBAR -->
-	<section id="content">
-		<!-- NAVBAR -->
-		<nav>
-			<i class='bx bx-menu toggle-sidebar'></i>
-		</nav>
-		<!-- NAVBAR -->
+	<header class="bg-white fixed w-full top-0 shadow-md z-50">
+		<div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+			<a href="{{ url_for('index') }}" class="flex items-center space-x-2 font-bold text-xl text-[#16499f]">
+				<img src="{{ url_for('static', filename='img/traffic-light.svg') }}" alt="Logo" class="w-8 h-8">
+				<span>JagaLantas</span>
+			</a>
+			<nav class="hidden md:flex space-x-8 font-medium text-gray-600">
+				<a href="#about" class="hover:text-[#16499f]">Tentang</a>
+				<a href="#features" class="hover:text-[#16499f]">Halaman</a>
+				<a href="#cta" class="hover:text-[#16499f]">Dashboard</a>
+			</nav>
+		</div>
+	</header>
 
-		<!-- MAIN -->
-		<main>
-			<h1 class="title">About</h1>
-			<ul class="breadcrumbs">
-				<li><a href="{{ url_for('index') }}">Home</a></li>
-				<li class="divider">/</li>
-				<li><a href="{{ url_for('index') }}" class="active">About</a></li>
-			</ul>
+	<!-- HERO SECTION -->
+	<section class="relative bg-gradient-to-r bg-[#16499f] text-white">
+		<div class="max-w-6xl mx-auto px-6 py-24 flex flex-col md:flex-row items-center gap-10">
+			<div class="flex-1" data-aos="fade-right">
+				<h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+					Dashboard <span class="text-[#fec80c]">Pola Kecelakaan Lalu Lintas</span> Jawa Tengah
+				</h1>
+				<p class="text-lg md:text-xl mb-8">
+					Hasil penelitian skripsi mahasiswa <span class="font-semibold">Politeknik Statistika STIS</span>
+					studi
+					<span class="font-semibold">Komputasi Statistik</span> peminatan <span class="font-semibold">Sains
+						Data</span>.
+				</p>
+				<a href="#about"
+					class="bg-[#fec80c] text-gray-900 px-6 py-3 rounded-xl font-bold shadow hover:bg-yellow-300 transition">
+					Pelajari Lebih Lanjut
+				</a>
+			</div>
+			<div class="flex-1 flex justify-center" data-aos="fade-left">
+				<img src="../static/img/Gambar Pola.png" alt="Traffic Dashboard" class="w-96">
+			</div>
+		</div>
+	</section>
 
-			<div class="info-data">
-				<div class="card">
-					<div class="head-scrap">
-						<div>
-							<h2>Tentang <i>Website</i></h2>
-						</div>
-						<div class="tentang-teks">
-							<p><i>Website</i> ini merupakan artifak dari skripsi mahasiswa Politeknik Statistika STIS
-								yang
-								berjudul "<b>Penerapan <i>Ensemble Learning</i> pada Deteksi Pola Kecelakaan Lalu Lintas
-									Menggunakan <i>Named Entity Recognition</i> Berbasis Berita <i>Online</i> (Studi
-									Kasus: Provinsi Jawa Tengah)</b>". <i>Website</i> ini menyediakan <i>dashboard</i>
-								yang menampilkan hasil penelitian tersebut, yaitu hasil ekstraksi informasi berita
-								<i>online</i> <b>Detikcom</b> menggunakan
-								model NER
-								<b>IndoBERT</b> serta klasifikasi untuk deteksi pola kecelakaan lalu lintas menggunakan
-								model <i><b>Random
-										Forest</b></i>. Selain itu, terdapat pula penggunan <i>surrogate model</i>
-								berbasis
-								<i><b>Decision Tree</b></i> untuk meningkatkan interpretabilitas dari model klasifikasi.
-							</p>
-							<p>Halaman yang disediakan oleh <i>website</i> ini:</p>
-							<ul class="tentang-list">
-								<li><b>Halaman <i>Scraping</i></b>, yang berisi tabel hasil otomatisasi <i>scraping</i>
-									berita
-									<i>online</i> setiap harinya.
-								</li>
-								<li><b>Halaman Data</b>, yang berisi tabel berita <i>online</i> serta tabel hasil
-									ekstraksi
-									informasi
-									berita <i>online.</i></li>
-								<li><b>Halaman <i>Dashboard</i></b>, yang berisi visualisasi hasil ekstraksi informasi
-									berita <i>online</i>.</li>
-								<li><b>Halaman Analisis</b>, yang berisi pohon keputusan untuk mendeteksi pola
-									kecelakaan lalu lintas di Jawa Tengah.</li>
-								</li>
-							</ul>
-						</div>
-					</div>
+	<!-- ABOUT SECTION -->
+	<section id="about" class="max-w-6xl mx-auto px-6 py-20">
+		<div class="text-center mb-12">
+			<h2 class="text-3xl md:text-4xl font-bold mb-4">Tentang <i>Website</i></h2>
+			<p class="text-lg text-gray-600 max-w-2xl mx-auto">
+				<i>Website</i> ini merupakan artifak dari skripsi mahasiswa Politeknik Statistika STIS yang
+				berjudul <b>"Penerapan <i>Ensemble Learning</i> pada Deteksi Pola Kecelakaan Lalu Lintas
+					Menggunakan <i>Named Entity Recognition</i> Berbasis Berita <i>Online</i> (Studi Kasus: Jawa
+					Tengah)"</b>.
+			</p>
+		</div>
+
+		<div class="grid md:grid-cols-2 gap-10 items-center">
+			<div data-aos="zoom-in">
+				<img src="../static/img/tentang.png" alt="About Image" class="w-96 mx-auto">
+			</div>
+			<div data-aos="fade-left">
+				<p class="mb-4 text-lg" style="text-align: justify;">
+					<i>Website</i> ini menyediakan <i>dashboard</i> yang menampilkan hasil ekstraksi informasi
+					berita <i>online</i> <b>Detikcom</b> menggunakan model NER <b>IndoBERT</b> serta
+					klasifikasi untuk deteksi pola kecelakaan lalu lintas menggunakan <i><b>Random Forest</b></i>.
+				</p>
+				<p class="text-lg" style="text-align: justify;">
+					Selain itu, terdapat pula penggunaan <i>surrogate model</i> berbasis
+					<i><b>Decision Tree</b></i> untuk meningkatkan interpretabilitas model klasifikasi.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<!-- FEATURE SECTION -->
+	<section id="features" class="bg-gray-100 py-20">
+		<div class="max-w-6xl mx-auto px-6 text-center">
+			<h2 class="text-3xl md:text-4xl font-bold mb-12">Halaman yang Tersedia</h2>
+			<div class="grid md:grid-cols-4 gap-8">
+				<div class="bg-white shadow-lg rounded-2xl p-6 hover:shadow-xl transition" data-aos="flip-left">
+					<img src="../static/img/scraping.png" class="w-16 mx-auto mb-4">
+					<h3 class="font-bold mb-2">Scraping</h3>
+					<p class="text-sm text-gray-600">Tabel hasil otomatisasi <i>scraping</i> berita <i>online</i> setiap
+						harinya.</p>
+				</div>
+				<div class="bg-white shadow-lg rounded-2xl p-6 hover:shadow-xl transition" data-aos="flip-left">
+					<img src="../static/img/data.png" class="w-16 mx-auto mb-4">
+					<h3 class="font-bold mb-2">Data</h3>
+					<p class="text-sm text-gray-600">Tabel berita <i>online</i> dan hasil ekstraksi informasi.</p>
+				</div>
+				<div class="bg-white shadow-lg rounded-2xl p-6 hover:shadow-xl transition" data-aos="flip-right">
+					<img src="../static/img/dashboard.png" class="w-16 mx-auto mb-4">
+					<h3 class="font-bold mb-2">Dashboard</h3>
+					<p class="text-sm text-gray-600">Visualisasi interaktif hasil ekstraksi informasi berita
+						<i>online</i>.
+					</p>
+				</div>
+				<div class="bg-white shadow-lg rounded-2xl p-6 hover:shadow-xl transition" data-aos="flip-right">
+					<img src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" class="w-16 mx-auto mb-4">
+					<h3 class="font-bold mb-2">Pola</h3>
+					<p class="text-sm text-gray-600">Pohon keputusan untuk mendeteksi pola kecelakaan lalu lintas.</p>
 				</div>
 			</div>
-		</main>
-		<!-- MAIN -->
+		</div>
 	</section>
-	<!-- NAVBAR -->
 
-	<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-	<script src="../static/js/script.js"></script>
+	<!-- CTA -->
+	<section id="cta" class="bg-[#16499f] text-white py-16">
+		<div class="max-w-4xl mx-auto text-center px-6" data-aos="zoom-in">
+			<h2 class="text-3xl md:text-4xl font-bold mb-4">Jelajahi Dashboard Interaktif</h2>
+			<p class="text-lg mb-6">Lihat hasil ekstraksi berita, visualisasi pola kecelakaan lalu lintas, dan analisis
+				model AI
+				dengan mudah.</p>
+			<a href="/scraping"
+				class="bg-[#fec80c] text-gray-900 px-6 py-3 rounded-xl font-bold shadow hover:bg-yellow-300 transition">
+				Mulai Eksplorasi
+			</a>
+		</div>
+	</section>
+
+	<footer class="bg-gray-900 text-gray-400 text-center py-6 text-sm">
+		© 2025 JagaLantas • Dibuat oleh Raihan Rahmanda Junianto | Politeknik Statistika STIS
+	</footer>
+
+	<!-- AOS Animation -->
+	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+	<script>
+		AOS.init({
+			duration: 1000,
+			once: true
+		});
+	</script>
 </body>
 
 </html>

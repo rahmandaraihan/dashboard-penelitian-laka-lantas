@@ -35,7 +35,7 @@
             </a>
         </div>
         <ul class="side-menu">
-            <li><a href="{{ url_for('index') }}"><i class='bx  bxs-user-circle icon'></i> About</a></li>
+            <!-- <li><a href="{{ url_for('index') }}"><i class='bx  bxs-user-circle icon'></i> About</a></li> -->
             <li><a href="{{ url_for('scraping_page') }}"><i class='bx  bxs-news icon'></i> Scraping</a></li>
             <li><a href="{{ url_for('data_page') }}"><i class='bx  bxs-database icon'></i> Data</a></li>
             <li><a href="{{ url_for('dashboard_page') }}" class="active"><i class='bx bxs-dashboard icon'></i>
@@ -94,6 +94,10 @@
                     <button type="submit">Tampilkan</button>
                 </div>
             </form>
+            <div class="last-update-dashboard">
+                <p>terakhir diperbarui: <span id="last-update-dashboard">{{ tanggal_terbaru or 'Tidak tersedia'
+                        }}</span></p>
+            </div>
 
             <div class="baris-1">
                 <div class="card-chart-overall">
@@ -142,7 +146,9 @@
                                 <label><input type="radio" name="periode" value="bulan"> Bulanan</label>
                             </div>
                         </div>
-                        <canvas id="chartDate"></canvas>
+                        <div class="chart-container">
+                            <canvas id="chartDate"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -257,7 +263,9 @@
                                     Bulanan</label>
                             </div>
                         </div>
-                        <canvas id="chartInjury"></canvas>
+                        <div class="chart-container">
+                            <canvas id="chartInjury"></canvas>
+                        </div>
                     </div>
                 </div>
                 <div class="card-chart">
@@ -273,7 +281,9 @@
                                     Bulanan</label>
                             </div>
                         </div>
-                        <canvas id="chartDeath"></canvas>
+                        <div class="chart-container">
+                            <canvas id="chartDeath"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>

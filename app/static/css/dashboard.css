@@ -1,3 +1,10 @@
+.last-update-dashboard {
+    margin-top: 5px;
+    margin-left: 5px;
+    font-size: 16px;
+    font-style: italic;
+}
+
 .baris-1 {
     margin-top: 15px;
     display: grid;
@@ -38,6 +45,15 @@
     margin-bottom: 20px;
     height: 90%;
 }
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    /* penuh mengikuti parent */
+    height: 550px;
+    /* bisa disesuaikan */
+}
+
 
 .card-chart .head-chart-overall {
     display: flex;
@@ -299,7 +315,50 @@
     opacity: 0.7;
 }
 
-.title-switch {
+/* .title-switch {
     display: flex;
     gap: 10px;
+} */
+
+.title-switch {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    /* penting supaya bisa turun */
+    gap: 8px;
+}
+
+.title-switch h2 {
+    margin: 0;
+}
+
+.periode-switch {
+    display: flex;
+    gap: 12px;
+}
+
+/* Jika layar kecil, ubah jadi kolom */
+@media (max-width: 600px) {
+    .title-switch {
+        flex-direction: column;
+        align-items: flex-start;
+        /* biar rata kiri */
+    }
+
+    .periode-switch {
+        margin-top: 8px;
+    }
+}
+
+/* Jika layar kecil */
+@media (max-width: 600px) {
+    .head-border h2 {
+        font-size: 12px;
+        /* perkecil font agar muat */
+        line-height: 1.3;
+        /* biar rapi kalau kepanjangan */
+        justify-content: center;
+        text-align: center;
+    }
 }

@@ -23,7 +23,7 @@
             </a>
         </div>
         <ul class="side-menu">
-            <li><a href="{{ url_for('index') }}"><i class='bx  bxs-user-circle icon'></i> About</a></li>
+            <!-- <li><a href="{{ url_for('index') }}"><i class='bx  bxs-user-circle icon'></i> About</a></li> -->
             <li><a href="{{ url_for('scraping_page') }}" class="active"><i class='bx  bxs-news icon'></i> Scraping</a>
             </li>
             <li><a href="{{ url_for('data_page') }}"><i class='bx  bxs-database icon'></i> Data</a></li>
@@ -52,7 +52,7 @@
             </ul>
 
             <div class="info-data">
-                <!-- <div class="card">
+                <div class="card">
                     <div class="head-scrap">
                         <div>
                             <h2><i>Scraping</i> Berita <i>Online</i></h2>
@@ -64,11 +64,11 @@
                         </div>
                         <div id="result"></div>
                     </div>
-                </div> -->
+                </div>
                 <div class="card">
                     <div>
                         <h2>Tabel Hasil Bersih <i>Scraping</i> Berita <i>Online</i></h2>
-                        <p>Data terakhir diupdate: <span id="last-update">Memuat...</span></p>
+                        <p style="font-style: italic;">terakhir diperbarui: <span id="last-update">memuat...</span></p>
                     </div>
                     <div class="table-wrapper">
                         <table id="resultTable">
@@ -85,6 +85,15 @@
                             <tbody></tbody>
                         </table>
 
+                    </div>
+                    <div class="ket-table">
+                        <p>Catatan:</p>
+                        <ul style="margin-left: 20px;">
+                            <li>Tabel ini akan diperbarui secara otomatis menyesuaikan hasil <i>scraping</i></li>
+                            <li>Proses <i>scraping</i> dilakukan setiap pukul 08.00 WIB untuk mengambil berita hari
+                                sebelumnya
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>

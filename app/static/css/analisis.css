@@ -130,3 +130,113 @@
     /* atur tinggi maksimal */
     overflow-y: auto;
 }
+
+
+#decision-container {
+    background: white;
+    /* padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
+    /* max-width: 1000px; */
+    overflow-x: auto;
+}
+
+h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+.flow {
+    display: flex;
+    align-items: flex-start;
+    /* biar kalau tinggi node beda, tidak tabrakan */
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.node {
+    display: inline-block;
+    padding: 15px 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    text-align: center;
+    width: fit-content;
+    /* mengikuti isi */
+    max-width: none;
+    /* jangan dibatasi */
+    white-space: nowrap;
+    /* biar tetap satu baris (kalo mau wrap bisa diganti normal) */
+}
+
+.node h3 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: #444;
+}
+
+select {
+    width: 100%;
+    /* isi penuh kotak node */
+    padding: 6px 10px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    white-space: normal;
+    /* biar opsi wrap kalau panjang */
+    display: block;
+    margin-top: 10px;
+    width: fit-content;
+    /* dropdown mengikuti isi */
+    min-width: 100%;
+    /* tapi minimal selebar box parent */
+}
+
+select option {
+    white-space: normal;
+    /* biar opsi panjang bisa multiline */
+    padding: 5px;
+}
+
+.arrow {
+    font-size: 20px;
+    color: #666;
+    align-self: center;
+    /* panah tetap di tengah */
+}
+
+#result {
+    margin-top: 5px;
+    /* font-weight: bold; */
+    font-size: 18px;
+    color: #1a73e8;
+    padding: 15px;
+    border-radius: 8px;
+    background: #eef3ff;
+    text-align: justify;
+}
+
+.interpretation {
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+.summary {
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: justify;
+}
+
+.list-summary {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.icon-summary img {
+    width: 45px;
+    /* biar nggak lebih besar dari parent */
+    height: auto;
+    /* supaya proporsional */
+    display: block;
+}

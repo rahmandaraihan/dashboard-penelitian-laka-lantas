@@ -24,6 +24,57 @@ main .info-data {
     margin-top: 20px;
 }
 
+.date-filter {
+    display: flex;
+    gap: 20px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    /* padding: 12px 15px; */
+    /* background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 10px; */
+    align-items: center;
+}
+
+/* Responsif untuk layar kecil */
+@media (max-width: 600px) {
+    .date-filter {
+        flex-direction: column;
+    }
+}
+
+.last-update-news,
+.last-update-extraction {
+    margin-top: 10px;
+    font-style: italic;
+}
+
+.date-input {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+}
+
+.date-input label {
+    margin-bottom: 5px;
+    /* font-weight: bold; */
+    color: black;
+}
+
+.date-input input[type="date"] {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: border-color 0.2s;
+}
+
+.date-input input[type="date"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+
 /* TABEL BERITA */
 #NewsTable {
     width: 100%;

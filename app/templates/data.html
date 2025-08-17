@@ -29,7 +29,7 @@
             </a>
         </div>
         <ul class="side-menu">
-            <li><a href="{{ url_for('index') }}"><i class='bx  bxs-user-circle icon'></i> About</a></li>
+            <!-- <li><a href="{{ url_for('index') }}"><i class='bx  bxs-user-circle icon'></i> About</a></li> -->
             <li><a href="{{ url_for('scraping_page') }}"><i class='bx  bxs-news icon'></i> Scraping</a></li>
             <li><a href="{{ url_for('data_page') }}" class="active"><i class='bx  bxs-database icon'></i> Data</a></li>
             <li><a href="{{ url_for('dashboard_page') }}"><i class='bx bxs-dashboard icon'></i> Dashboard</a></li>
@@ -63,6 +63,21 @@
                             <h2>Tabel Berita <i>Online</i></h2>
                         </div>
                         <div class="table-wrapper-datatable">
+                            <!-- Filter tanggal -->
+                            <div class="date-filter">
+                                <div class="date-input">
+                                    <label for="startDate">Tanggal Awal</label>
+                                    <input type="date" id="startDate">
+                                </div>
+                                <div class="date-input">
+                                    <label for="endDate">Tanggal Akhir</label>
+                                    <input type="date" id="endDate">
+                                </div>
+                            </div>
+                            <div class="last-update-news">
+                                <p>terakhir diperbarui: <span id="last-update-news">memuat...</span></p>
+                            </div>
+
                             <table id="NewsTable">
                                 <thead>
                                     <tr>
@@ -85,6 +100,19 @@
                             <h2>Tabel Hasil Ekstraksi Berita <i>Online</i></h2>
                         </div>
                         <div class="table-wrapper-datatable">
+                            <div class="date-filter">
+                                <div class="date-input">
+                                    <label for="startExtractionDate">Tanggal Awal</label>
+                                    <input type="date" id="startExtractionDate">
+                                </div>
+                                <div class="date-input">
+                                    <label for="endExtractionDate">Tanggal Akhir</label>
+                                    <input type="date" id="endExtractionDate">
+                                </div>
+                            </div>
+                            <div class="last-update-extraction">
+                                <p>terakhir diperbarui: <span id="last-update-extraction">memuat...</span></p>
+                            </div>
                             <table id="ExtractionTable">
                                 <thead>
                                     <tr>

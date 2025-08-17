@@ -75,11 +75,20 @@ function loadScrapingResults() {
             });
         })
         .catch(error => {
+            // Hitung tanggal kemarin
+            const yesterday = new Date();
+            yesterday.setDate(yesterday.getDate() - 1);
+
+            const yyyy = yesterday.getFullYear();
+            const mm = String(yesterday.getMonth() + 1).padStart(2, '0');
+            const dd = String(yesterday.getDate()).padStart(2, '0');
+            const formatted = `${yyyy}-${mm}-${dd}`;
+
             console.error('Gagal memuat data:', error);
-            document.getElementById('last-update').textContent = 'Tidak ada data yang discraping hari ini.';
+            document.getElementById('last-update').textContent =
+                `Tidak ada berita yang discraping untuk tanggal ${formatted}.`;
         });
 }
-
 
 
 // Jika ingin load data saat halaman dibuka
