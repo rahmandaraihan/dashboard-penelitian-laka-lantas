@@ -732,6 +732,7 @@ def load_combine_news():
 
         df_news_combined = pd.concat([df_news, df_news_new], ignore_index=True)
         df_news_combined = df_news_combined.drop_duplicates(subset=['news_id'], keep='first')
+        df_news_combined = df_news_combined.replace({np.nan: None})
         data = df_news_combined.fillna('').to_dict(orient='records')
         return jsonify(data)
     except Exception as e:
