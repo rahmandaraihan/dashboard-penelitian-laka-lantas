@@ -25,7 +25,7 @@ app = Flask(
     __name__,
     template_folder='app/templates',
     static_folder='app/static',
-    model_folder='app/model',
+    model_folder='app/model'
 )
 
 @app.route('/')
