@@ -796,8 +796,8 @@ def load_classification_data():
 
 # Path model & encoder relatif terhadap lokasi main.py
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, "app", "model", "final_surrogate_tree.joblib")
-ENCODER_PATH = os.path.join(BASE_DIR, "app", "model", "encoder_ohe.joblib")
+MODEL_PATH = os.path.join(BASE_DIR, "app", "model", "final_random_forest.joblib")
+ENCODER_PATH = os.path.join(BASE_DIR, "app", "model", "final_encoder_rf.joblib")
 
 # Load sekali saja saat startup, bukan setiap request
 model = joblib.load(MODEL_PATH)
