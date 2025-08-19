@@ -794,11 +794,12 @@ def load_classification_data():
     except Exception as e:
         return jsonify({"error": str(e)})
 
+# Path model & encoder relatif terhadap lokasi main.py
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, "model", "final_surrogate_tree.joblib")
-ENCODER_PATH = os.path.join(BASE_DIR, "model", "encoder_ohe.joblib")
+MODEL_PATH = os.path.join(BASE_DIR, "app", "model", "final_surrogate_tree.joblib")
+ENCODER_PATH = os.path.join(BASE_DIR, "app", "model", "encoder_ohe.joblib")
 
-# Load model & encoder sekali saja (bukan tiap request)
+# Load sekali saja saat startup, bukan setiap request
 model = joblib.load(MODEL_PATH)
 encoder = joblib.load(ENCODER_PATH)
 
