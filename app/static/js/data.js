@@ -94,7 +94,7 @@ function loadNewsTable() {
 function loadExtractionTable() {
     fetch('/load-extraction-news')
         .then(res => res.json())
-        .then(data => {
+        .then(result => {
             const data = result.data || [];
             const lastUpdateExtraction = result.tanggal_terbaru || 'Tidak tersedia';
             console.log("DATA LOADED:", data);
