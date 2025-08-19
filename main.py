@@ -419,8 +419,8 @@ def dashboard_page():
     if lokasi:
         lokasi = lokasi.strip().lower()
 
-    tanggal_terbaru = df_loc['DATE_STANDARDIZED'].max()
-    tanggal_terbaru_str = tanggal_terbaru.strftime('%Y-%m-%d') if pd.notna(tanggal_terbaru) else None
+    tanggal_terbaru = pd.to_datetime(df_loc['DATE_STANDARDIZED'].max())
+    tanggal_terbaru_str = tanggal_terbaru.strftime('%d-%m-%Y') if pd.notna(tanggal_terbaru) else None
 
     return render_template(
         'dashboard.html',
@@ -695,7 +695,8 @@ def load_scraping_data():
         df_result = load_csv_from_drive(file_id, version=int(time.time() // 3600))
 
         # Ambil tanggal terbaru
-        tanggal_terbaru = df_result['news_date'].max()
+        tanggal_terbaru = pd.to_datetime(df_result['news_date'].max())
+        tanggal_terbaru = tanggal_terbaru.strftime("%d-%m-%Y")
 
         data = df_result.to_dict(orient='records')
         return jsonify({
@@ -734,8 +735,14 @@ def load_combine_news():
         df_news_combined = pd.concat([df_news, df_news_new], ignore_index=True)
         df_news_combined = df_news_combined.drop_duplicates(subset=['news_id'], keep='first')
         df_news_combined = df_news_combined.replace({np.nan: None})
+        
+        tanggal_terbaru = pd.to_datetime(df_news_combined['news_date'].max())
+        tanggal_terbaru = tanggal_terbaru.strftime("%d-%m-%Y")
         data = df_news_combined.fillna('').to_dict(orient='records')
-        return jsonify(data)
+        return jsonify({
+            "data": data,
+            "tanggal_terbaru": tanggal_terbaru
+        })
     except Exception as e:
         return jsonify({"error": str(e)})
     
@@ -757,8 +764,14 @@ def load_extraction_news():
         
         df_extraction = df_extraction.replace({np.nan: None})
 
+        tanggal_terbaru = pd.to_datetime(df_extraction['DATE_STANDARDIZED'].max())
+        tanggal_terbaru = tanggal_terbaru.strftime("%d-%m-%Y")
+
         data = df_extraction.to_dict(orient='records')
-        return jsonify(data)
+        return jsonify({
+            "data": data,
+            "tanggal_terbaru": tanggal_terbaru
+        })
     except Exception as e:
         return jsonify({"error": str(e)})
 
@@ -786,7 +799,8 @@ def load_classification_data():
         df_extraction = df_extraction.replace({np.nan: None})
 
         data = df_classification.to_dict(orient='records')
-        tanggal_terbaru = df_extraction['DATE_STANDARDIZED'].max()
+        tanggal_terbaru = pd.to_datetime(df_extraction['DATE_STANDARDIZED'].max())
+        tanggal_terbaru = tanggal_terbaru.strftime("%d-%m-%Y")
         return jsonify({
             "data": data,
             "tanggal_terbaru": tanggal_terbaru

@@ -1,8 +1,12 @@
 function loadNewsTable() {
     fetch('/load-combine-news')
         .then(res => res.json())
-        .then(data => {
+        .then(result => {
+            const data = result.data || [];
+            const lastUpdateNews = result.tanggal_terbaru || 'Tidak tersedia';
             console.log("DATA LOADED:", data);
+            // === Cari tanggal terbaru (max) dari kolom DATE_STANDARDIZED ===
+            document.getElementById('last-update-news').textContent = lastUpdateNews;
             // === Cari tanggal terbaru (max) dari kolom DATE_STANDARDIZED ===
             const dates = data
                 .map(row => row.news_date)
@@ -15,7 +19,6 @@ function loadNewsTable() {
                 // Set batas maksimal di date picker
                 document.getElementById("startDate").setAttribute("max", maxDateStr);
                 document.getElementById("endDate").setAttribute("max", maxDateStr);
-                document.getElementById('last-update-news').textContent = maxDateStr;
             }
             const tbody = document.querySelector('#NewsTable tbody');
             tbody.innerHTML = '';
@@ -92,7 +95,10 @@ function loadExtractionTable() {
     fetch('/load-extraction-news')
         .then(res => res.json())
         .then(data => {
+            const data = result.data || [];
+            const lastUpdateExtraction = result.tanggal_terbaru || 'Tidak tersedia';
             console.log("DATA LOADED:", data);
+            document.getElementById('last-update-extraction').textContent = lastUpdateExtraction;
 
             // === Cari tanggal terbaru (max) dari kolom DATE_STANDARDIZED ===
             const dates = data
@@ -106,7 +112,6 @@ function loadExtractionTable() {
                 // Set batas maksimal di date picker
                 document.getElementById("startExtractionDate").setAttribute("max", maxDateStr);
                 document.getElementById("endExtractionDate").setAttribute("max", maxDateStr);
-                document.getElementById('last-update-extraction').textContent = maxDateStr;
             }
 
             const tbody = document.querySelector('#ExtractionTable tbody');
