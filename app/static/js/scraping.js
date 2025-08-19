@@ -82,7 +82,7 @@ function loadScrapingResults() {
             const yyyy = yesterday.getFullYear();
             const mm = String(yesterday.getMonth() + 1).padStart(2, '0');
             const dd = String(yesterday.getDate()).padStart(2, '0');
-            const formatted = `${yyyy}-${mm}-${dd}`;
+            const formatted = `${dd}-${mm}-${yyyy}`;
 
             console.error('Gagal memuat data:', error);
             document.getElementById('last-update').textContent =
