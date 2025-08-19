@@ -19,6 +19,7 @@ import gdown
 from functools import lru_cache
 import time
 import tempfile
+import joblib
 
 app = Flask(
     __name__,
@@ -792,6 +793,43 @@ def load_classification_data():
         })
     except Exception as e:
         return jsonify({"error": str(e)})
+
+@app.route("/predict_pola", methods=["POST"])
+def predict():
+    model = joblib.load("app/model/final_surrogate_tree.joblib")
+
+    # Pastikan urutan kolom sesuai saat training OneHotEncoder
+    categorical_cols = ["DAY", "TIME", "VEHICLE", "ROAD", "CAUSE", "DRIVER_AGE"]
+
+    # Encoder yang sudah digunakan sebelumnya (harus disimpan juga waktu training!)
+    encoder = joblib.load("app/model/encoder_ohe.joblib")
+    data = request.get_json()
+
+    df_input = pd.DataFrame([data])
+
+    # One-hot encoding
+    X_encoded = pd.DataFrame(
+        encoder.transform(df_input[categorical_cols]),
+        columns=encoder.get_feature_names_out(categorical_cols)
+    )
+
+    # Prediksi
+    pred = model.predict(X_encoded)[0]
+
+    # Kalau hasil prediksi masih berupa string, jangan dipaksa jadi int
+    label_mapping = {0: "Tidak Ada Korban Jiwa", 1: "Ada Korban Jiwa"}
+
+    if pred in [0, 1]:  # kalau model keluar angka
+        result = label_mapping[pred]
+        pred_int = int(pred)
+    else:  # kalau model keluar string
+        result = str(pred)
+        pred_int = None   # atau bisa dihapus kalau tidak perlu
+
+    return jsonify({
+        "prediction": pred_int,
+        "label": result
+    })
 
 
 if __name__ == "__main__":

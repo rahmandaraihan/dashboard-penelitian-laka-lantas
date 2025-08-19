@@ -304,3 +304,46 @@ function addArrow() {
 
 // mulai dari root
 addNode(tree);
+
+document.getElementById("predictForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    let data = {};
+    formData.forEach((value, key) => data[key] = value);
+
+    const loadingEl = document.getElementById("loading");
+    const resultEl = document.getElementById("resultPredict");
+    loadingEl.style.display = "block";
+    resultEl.style.display = "none";
+    resultEl.innerText = "";
+    resultEl.className = ""; // reset class
+
+    try {
+        const response = await fetch("/predict_pola", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        // Tentukan warna box berdasarkan hasil
+        if (result.label && result.label.toLowerCase().includes("tidak ada korban jiwa")) {
+            resultEl.classList.add("result-safe");
+        } else {
+            resultEl.classList.add("result-danger");
+        }
+
+        // Tampilkan hasil di HTML
+        resultEl.innerText = result.label;
+        // this.reset();
+        resultEl.style.display = "block";
+    } catch (error) {
+        resultEl.classList.add("result-danger");
+        resultEl.innerText = "❌ Terjadi kesalahan: " + error;
+        resultEl.style.display = "block";
+    } finally {
+        loadingEl.style.display = "none";
+    }
+});
