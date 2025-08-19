@@ -11,3 +11,4 @@ requests
 gdown
 Sastrawi
 gunicorn
+scikit_learn
