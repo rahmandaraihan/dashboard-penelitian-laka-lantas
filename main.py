@@ -25,7 +25,6 @@ app = Flask(
     __name__,
     template_folder='app/templates',
     static_folder='app/static',
-    model_folder='app/model'
 )
 
 @app.route('/')
@@ -795,15 +794,23 @@ def load_classification_data():
     except Exception as e:
         return jsonify({"error": str(e)})
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, "model", "final_surrogate_tree.joblib")
+ENCODER_PATH = os.path.join(BASE_DIR, "model", "encoder_ohe.joblib")
+
+# Load model & encoder sekali saja (bukan tiap request)
+model = joblib.load(MODEL_PATH)
+encoder = joblib.load(ENCODER_PATH)
+
 @app.route("/predict_pola", methods=["POST"])
 def predict():
-    model = joblib.load("app/model/final_surrogate_tree.joblib")
+    # model = joblib.load("app/model/final_surrogate_tree.joblib")
 
-    # Pastikan urutan kolom sesuai saat training OneHotEncoder
+    # # Pastikan urutan kolom sesuai saat training OneHotEncoder
     categorical_cols = ["DAY", "TIME", "VEHICLE", "ROAD", "CAUSE", "DRIVER_AGE"]
 
-    # Encoder yang sudah digunakan sebelumnya (harus disimpan juga waktu training!)
-    encoder = joblib.load("app/model/encoder_ohe.joblib")
+    # # Encoder yang sudah digunakan sebelumnya (harus disimpan juga waktu training!)
+    # encoder = joblib.load("app/model/encoder_ohe.joblib")
     data = request.get_json()
 
     df_input = pd.DataFrame([data])
