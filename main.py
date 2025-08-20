@@ -728,7 +728,7 @@ def load_combine_news():
         # df_news_new = pd.read_csv(io.StringIO(response_df_news_new.text), encoding='utf-8-sig')
         
         file_id_df_news_new = '1mL1Va96NN6KoL_utz3rfzh8dAqyEj_jo'
-        df_news_new = load_csv_from_drive(file_id_df_news_new)
+        df_news_new = load_csv_from_drive(file_id_df_news_new, version=int(time.time() // 3600))
         
         df_news_new = df_news_new[['title','link','news_date','content','cleaned_content','cleaned_title','news_id']]
 
